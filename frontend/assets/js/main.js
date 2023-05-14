@@ -242,31 +242,42 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function connection(){
-  fetch("http://localhost:3000/auth/register",{
-    method:"POST"
-  })
-  .then(response => response.json())
-      .then(data => {
-          console.log(data)})
+  const name=document.getElementById("name").value
+const email=document.getElementById("email").value
+const password=document.getElementById("phone").value
+
+console.log(name,email,password)
+  fetch('http://localhost:3000/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({name:name,
+                            email:email,
+                          password:password})
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error))
 }
 const btn= document.getElementById("btn")
 btn.onclick=connection();
-async function postJSON(data) {
-  try {
-    const response = await fetch("http://localhost:3000/auth/register", {
-      method: "POST", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data)
-    });
 
-    const result = await response.json();
-    console.log("Success:", result);
-  } catch (error) {
-    console.error("Error:", error);
-  }
+const about= document.getElementById("about")
+
+const abouthandler=()=>{
+  console.log("about  clicked")
+  fetch('http://localhost:3000/auth/about') 
+      .then(response => response.json())
+      .then(data =>{
+        const img = document.createElement("img")
+        img.src=data.img
+        console.log(data.img)
+        document.body.innerHTML=""
+        document.body.appendChild(img)
+      })
+      .catch(error => console.error(error))
 }
+about.onclick=abouthandler();
 
-const data = { username: "example" };
-postJSON(data);
+
+
+  

@@ -3,7 +3,7 @@ const UserRouter = express.Router()
 
 const { 
     registerController,
-    // userLogin
+    about
 } = require("../controller/usercontroller")
 
 // const {rights,userbyrole} = require("../controllers/Rightcontroller")
@@ -12,5 +12,6 @@ const {
 
 UserRouter.post("/register",registerController)
 // UserRouter.post("/login",userLogin)
+UserRouter.get("/about",about)
 
 module.exports = UserRouter

@@ -8,7 +8,11 @@ const app = express()
 // app.use(express.urlencoder({extends:true}))
 
 app.use(express.json())
-app.use(cors())
+app.use(
+    cors({
+      origin: "*",
+    })
+  );
 
 
 app.get('/test', (req, res) => {
@@ -22,6 +26,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/yummy")
 
 app.use("/auth", UserRouter)
 // http://localhost:5000/auth/register
+
+
 
 // const port = process.env.Port
 app.listen(3000, () => {
